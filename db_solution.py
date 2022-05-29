@@ -11,8 +11,7 @@ import db.model
 def check_uuidv4(test_uuid, version=4):
     try:
         if uuid.UUID(test_uuid).version == version:
-
-            if one_device is None:
+            if not db.device.exists(test_uuid):
                 return False
         return True
     except ValueError:
