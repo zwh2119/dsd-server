@@ -78,7 +78,7 @@ def _train(duuid, info) -> None:
 
 
 def run_train(duuid, algo) -> None:
-    with open('al/algo.json', 'r') as f:
+    with open('al/al.json', 'r') as f:
         algo_list = json.load(f)
     info = algo_list[algo]
     pos_dir = os.path.abspath('./al')

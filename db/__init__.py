@@ -46,9 +46,9 @@ conn.execute('''
 conn.execute('''
     CREATE TABLE IF NOT EXISTS model (
         uuid VARCHAR(255) NOT NULL,
-        algo VARCHAR(255) NOT NULL,
+        al VARCHAR(255) NOT NULL,
         path VARCHAR(255) DEFAULT NULL,
-        primary key(uuid,algo)
+        primary key(uuid,al)
     );
 ''')
 

@@ -276,7 +276,7 @@ def check_device_model_version(uuid, algo):
     return response
 
 
-@cloud_server.get('/api/device/<uuid>/model/<algo>')
+@cloud_server.get('/api/device/<uuid>/model/<al>')
 def download_device_model(uuid, algo):
 
     session = request.environ.get('beaker.session')
@@ -314,7 +314,7 @@ def download_device_model(uuid, algo):
     return download_file
 
 
-@cloud_server.post('/api/device/<uuid>/model/<algo>')
+@cloud_server.post('/api/device/<uuid>/model/<al>')
 def train_algo(uuid, algo):
 
     session = request.environ.get('beaker.session')
@@ -333,7 +333,7 @@ def train_algo(uuid, algo):
     run_train.run_train(uuid, algo)
 
 
-@cloud_server.put('/api/device/<uuid>/model/<algo>')
+@cloud_server.put('/api/device/<uuid>/model/<al>')
 def upload_model(uuid, algo):
     session = request.environ.get('beaker.session')
     if session.get('usr') is None:
@@ -365,7 +365,7 @@ def upload_model(uuid, algo):
     return get_success()
 
 
-@cloud_server.delete('/api/device/<uuid>/model/<algo>')
+@cloud_server.delete('/api/device/<uuid>/model/<al>')
 def clear_cloud_model(uuid, algo):
 
     session = request.environ.get('beaker.session')
@@ -399,7 +399,7 @@ def clear_all_model(uuid):
     if not db_solution.check_uuidv4(uuid):
         return get_error(404, 'Invalid uuidv4')
 
-    with open('al/algo.json', 'r') as f:
+    with open('al/al.json', 'r') as f:
         algo_list = json.load(f)
     for algo in algo_list.keys():
         db_solution.set_model(uuid, algo)
@@ -495,12 +495,12 @@ def get_all_algo():
     if session.get('usr') is None:
         return get_error(401, 'No administration authority')
 
-    with open('al/algo.json', 'r') as f:
+    with open('al/al.json', 'r') as f:
         algo_list = json.load(f)
     return get_success(algo_list)
 
 
-@cloud_server.get('/api/model/<algo>')
+@cloud_server.get('/api/model/<al>')
 def download_base_model(algo):
     session = request.environ.get('beaker.session')
     if session.get('usr') is None:
@@ -509,9 +509,9 @@ def download_base_model(algo):
     if not db_solution.check_algo(algo):
         return get_error(404, 'Algorithm not found')
 
-    # algo_list = json.load('al/algo.json')
+    # algo_list = json.load('al/al.json')
     #
-    # model_file = algo_list[algo]['base']
+    # model_file = algo_list[al]['base']
 
     model_file = db_solution.get_base_model(algo)
 
@@ -522,7 +522,7 @@ def download_base_model(algo):
     return download_file
 
 
-@cloud_server.put('/api/model/<algo>')
+@cloud_server.put('/api/model/<al>')
 def upload_base_model(algo):
     session = request.environ.get('beaker.session')
     if session.get('usr') is None:

@@ -83,7 +83,7 @@ def get_device(duuid) -> db.device.Device:
 
 def check_algo(algo):
     try:
-        with open('al/algo.json', 'r') as f:
+        with open('al/al.json', 'r') as f:
             al_list = json.load(f)
             return algo in al_list.keys()
     except:
