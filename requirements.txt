@@ -17,7 +17,7 @@ zope.event==4.5.0
 zope.interface==5.4.0
 accelerate==0.8.0
 joblib==1.1.0
-numpy==1.22.3
+numpy==1.21.6
 pandas==1.4.2
 pytest==7.1.2
 scikit_learn==1.1.1
