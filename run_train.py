@@ -81,7 +81,8 @@ def run_train(duuid, algo) -> None:
     with open('al/algo.json', 'r') as f:
         algo_list = json.load(f)
     info = algo_list[algo]
-    info['base'] = info['base'].replace('$ALGO', 'al')
-    info['entrypoint']['train'] = [x.replace('$ALGO', 'al') for x in info['entrypoint']['train']]
+    pos_dir = os.path.abspath('./al')
+    info['base'] = info['base'].replace('$ALGO', pos_dir)
+    info['entrypoint']['train'] = [x.replace('$ALGO', pos_dir) for x in info['entrypoint']['train']]
 
     threading.Thread(target=_train, args=(duuid, info)).start()
