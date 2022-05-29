@@ -1,0 +1,8 @@
+accelerate==0.8.0
+joblib==1.1.0
+numpy==1.22.3
+pandas==1.4.2
+pytest==7.1.2
+scikit_learn==1.1.1
+torch==1.11.0
+tqdm==4.64.0

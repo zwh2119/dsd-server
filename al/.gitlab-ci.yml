@@ -1,0 +1,12 @@
+stages:
+    - test
+    - deploy
+        
+test:
+    stage: deploy
+    script:
+        #needed code if the container is running
+        #- docker stop north-start-test
+        #- docker rm north-start-test
+        - docker build -t north-start-test .
+        - docker run north-start-test sh -c "pytest tests"

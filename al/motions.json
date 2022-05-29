@@ -1,0 +1,38 @@
+[
+  {
+    "name": "sit",
+    "duration": 20,
+    "display": "sit",
+    "desc": "Please sit down on the chair."
+  },
+  {
+    "name": "stand",
+    "duration": 20,
+    "display": "stand",
+    "desc": "Please stand up."
+  },
+  {
+    "name": "walk",
+    "duration": 20,
+    "display": "walk",
+    "desc": "Please walk on a firm and level ground."
+  },
+  {
+    "name": "upstairs",
+    "duration": 20,
+    "display": "upstairs",
+    "desc": "Please go upstairs."
+  },
+  {
+    "name": "downstairs",
+    "duration": 20,
+    "display": "downstairs",
+    "desc": "Please go downstairs."
+  },
+  {
+    "name": "run",
+    "duration": 20,
+    "display": "run",
+    "desc": "Please run on a firm and level ground."
+  }
+]
