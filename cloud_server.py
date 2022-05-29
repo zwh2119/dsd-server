@@ -564,6 +564,9 @@ def tt():
     session.save()
 
 
+app = SessionMiddleware(cloud_server, session_opts)
+
+
 if __name__ == '__main__':
-    app = SessionMiddleware(cloud_server, session_opts)
+
     run(app=app, host='0.0.0.0', port=8080, debug=True)
