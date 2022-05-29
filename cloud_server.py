@@ -330,6 +330,8 @@ def train_algo(uuid, algo):
     if not db_solution.check_algo(algo):
         return get_error(404, 'Algorithm not found')
 
+    run_train.run_train(uuid, algo)
+
 
 @cloud_server.put('/api/device/<uuid>/model/<algo>')
 def upload_model(uuid, algo):
