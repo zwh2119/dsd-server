@@ -9,7 +9,6 @@ import subprocess
 from tempfile import mkdtemp
 import db_solution
 import db.device
-import db.model
 
 _tasks: dict = {}
 _stops: dict = {}

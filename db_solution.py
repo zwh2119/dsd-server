@@ -5,7 +5,6 @@ import sys
 
 import db.device
 import db.admin
-import db.model
 
 
 def check_uuidv4(test_uuid, version=4):
