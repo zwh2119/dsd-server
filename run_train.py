@@ -78,7 +78,8 @@ def _train(duuid, info) -> None:
 
 
 def run_train(duuid, algo) -> None:
-    algo_list = json.load('al/algo.json')
+    with open('al/algo.json', 'r') as f:
+        algo_list = json.load(f)
     info = algo_list[algo]
     info['base'] = info['base'].replace('$ALGO', 'al')
     info['entrypoint']['train'] = [x.replace('$ALGO', 'al') for x in info['entrypoint']['train']]
