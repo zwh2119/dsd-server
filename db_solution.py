@@ -2,7 +2,7 @@ import json
 import uuid
 import re
 import sys
-sys.path.append(r"D:\dsd-server-module-of-jokers\src\dsdServer")
+
 import db.device
 import db.admin
 import db.model
