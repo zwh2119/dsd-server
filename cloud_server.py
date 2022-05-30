@@ -491,10 +491,6 @@ def logout():
 
 @cloud_server.get('/api/models')
 def get_all_algo():
-    session = request.environ.get('beaker.session')
-    if session.get('usr') is None:
-        return get_error(401, 'No administration authority')
-
     with open('al/algo.json', 'r') as f:
         algo_list = json.load(f)
     return get_success(algo_list)
@@ -502,9 +498,6 @@ def get_all_algo():
 
 @cloud_server.get('/api/model/<al>')
 def download_base_model(algo):
-    session = request.environ.get('beaker.session')
-    if session.get('usr') is None:
-        return get_error(401, 'No administration authority')
 
     if not db_solution.check_algo(algo):
         return get_error(404, 'Algorithm not found')
