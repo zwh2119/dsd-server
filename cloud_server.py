@@ -399,7 +399,7 @@ def clear_all_model(uuid):
     if not db_solution.check_uuidv4(uuid):
         return get_error(404, 'Invalid uuidv4')
 
-    with open('al/al.json', 'r') as f:
+    with open('al/algo.json', 'r') as f:
         algo_list = json.load(f)
     for algo in algo_list.keys():
         db_solution.set_model(uuid, algo)
@@ -495,7 +495,7 @@ def get_all_algo():
     if session.get('usr') is None:
         return get_error(401, 'No administration authority')
 
-    with open('al/al.json', 'r') as f:
+    with open('al/algo.json', 'r') as f:
         algo_list = json.load(f)
     return get_success(algo_list)
 
@@ -509,7 +509,7 @@ def download_base_model(algo):
     if not db_solution.check_algo(algo):
         return get_error(404, 'Algorithm not found')
 
-    # algo_list = json.load('al/al.json')
+    # algo_list = json.load('al/algo.json')
     #
     # model_file = algo_list[al]['base']
 
