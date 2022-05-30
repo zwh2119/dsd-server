@@ -276,7 +276,7 @@ def check_device_model_version(uuid, algo):
     return response
 
 
-@cloud_server.get('/api/device/<uuid>/model/<al>')
+@cloud_server.get('/api/device/<uuid>/model/<algo>')
 def download_device_model(uuid, algo):
 
     session = request.environ.get('beaker.session')
@@ -314,7 +314,7 @@ def download_device_model(uuid, algo):
     return download_file
 
 
-@cloud_server.post('/api/device/<uuid>/model/<al>')
+@cloud_server.post('/api/device/<uuid>/model/<algo>')
 def train_algo(uuid, algo):
 
     session = request.environ.get('beaker.session')
@@ -333,7 +333,7 @@ def train_algo(uuid, algo):
     run_train.run_train(uuid, algo)
 
 
-@cloud_server.put('/api/device/<uuid>/model/<al>')
+@cloud_server.put('/api/device/<uuid>/model/<algo>')
 def upload_model(uuid, algo):
     session = request.environ.get('beaker.session')
     if session.get('usr') is None:
@@ -365,7 +365,7 @@ def upload_model(uuid, algo):
     return get_success()
 
 
-@cloud_server.delete('/api/device/<uuid>/model/<al>')
+@cloud_server.delete('/api/device/<uuid>/model/<algo>')
 def clear_cloud_model(uuid, algo):
 
     session = request.environ.get('beaker.session')
@@ -496,7 +496,7 @@ def get_all_algo():
     return get_success(algo_list)
 
 
-@cloud_server.get('/api/model/<al>')
+@cloud_server.get('/api/model/<algo>')
 def download_base_model(algo):
 
     if not db_solution.check_algo(algo):
@@ -515,7 +515,7 @@ def download_base_model(algo):
     return download_file
 
 
-@cloud_server.put('/api/model/<al>')
+@cloud_server.put('/api/model/<algo>')
 def upload_base_model(algo):
     session = request.environ.get('beaker.session')
     if session.get('usr') is None:
