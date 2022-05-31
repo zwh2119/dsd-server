@@ -28,7 +28,7 @@ def __train(device: db.device.Device, info: dict, stop: threading.Event) -> None
     new_model = os.path.join(new_model_dir, 'model')
     base_model = db_solution.get_base_model(info['name'])
     base_model = info['base'] if base_model is None else base_model
-    entry_point = info['entry_point']['train']
+    entry_point = info['entrypoint']['train']
     entry_point.append(calibration)
     entry_point.append(new_model)
     entry_point.append(base_model)
