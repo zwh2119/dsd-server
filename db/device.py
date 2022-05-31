@@ -65,7 +65,7 @@ class Device:
     @calibration.setter
     def calibration(self, value: str) -> None:
         if value is None:
-            shutil.rmtree(self.calibration)
+            shutil.rmtree(self.calibration, ignore_errors=True)
         else:
             if not os.path.exists(self.calibration):
                 os.makedirs(self.calibration)
