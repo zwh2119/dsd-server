@@ -33,7 +33,7 @@ def notify(device: db.device.Device, res : bool) -> None:
         else:
             body += '<p>&nbsp;&nbsp;&nbsp;&nbsp;We are sorry to notify you that your training on the cloud failed for' \
                     'some unexpected reason.</p>'
-            body += '<p>&nbsp;&nbsp;&nbsp;&nbsp;Please login on the online system to retry or contact our company</p>'
+            body += '<p>&nbsp;&nbsp;&nbsp;&nbsp;Please login on the online system to retry or contact our company.</p>'
             body += '<p>&nbsp;&nbsp;&nbsp;&nbsp;Thanks for your support!</p>'
         msg = MIMEText(body, 'html')
         msg['subject'] = 'Training Result Notification from DSD'
