@@ -3,7 +3,6 @@ import logging
 from .argparser import *
 from .dataset import *
 
-device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
 window_size: int = 20
 data_size: int = 45
 

@@ -1,4 +1,24 @@
+import torch.fft
 from torch import Tensor, nn
+
+import utils
+
+
+class FeedForwardModel(nn.Module):
+    def __init__(self, hidden_size: int, num_labels: int = 6):
+        super(FeedForwardModel, self).__init__()
+        self.predict = nn.Sequential(
+            nn.Linear(hidden_size * utils.window_size * 2, hidden_size),
+            nn.GELU(),
+            nn.Linear(hidden_size, hidden_size // 4),
+            nn.GELU(),
+            nn.Linear(hidden_size // 4, num_labels)
+        )
+
+    def forward(self, inputs: Tensor) -> Tensor:
+        inputs = torch.fft.fft(inputs, norm='forward', dim=-1)
+        inputs = torch.cat([inputs.real, inputs.imag], dim=-1).flatten(-2)
+        return self.predict(inputs)
 
 
 class RNNModel(nn.Module):

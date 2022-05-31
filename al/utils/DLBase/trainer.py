@@ -32,14 +32,14 @@ class Trainer:
             model.load_state_dict(torch.load(in_model_file))
         optimizer = self.create_optimizer(model)
 
-        train_dataloader = self.get_train_dataloader(data_file, 128)
+        train_dataloader = self.get_train_dataloader(data_file, 32)
 
         self.accelerator = Accelerator()
         self.model, self.optimizer = self.accelerator.prepare(model, optimizer)
         self.train_dataloader = self.accelerator.prepare(train_dataloader)
 
         if debug:
-            eval_dataloader = self.get_eval_dataloader(128)
+            eval_dataloader = self.get_eval_dataloader(32)
             self.eval_dataloader = self.accelerator.prepare(eval_dataloader)
 
         self.debug = debug
@@ -74,7 +74,7 @@ class Trainer:
 
     @staticmethod
     def create_optimizer(model: nn.Module):
-        return torch.optim.AdamW(model.parameters(), lr=1e-4)
+        return torch.optim.AdamW(model.parameters(), lr=3e-4)
 
     @staticmethod
     def get_train_dataloader(data_file: str, batch_size: int):

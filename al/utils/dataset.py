@@ -10,7 +10,7 @@ import utils
 
 
 class CustomDataset(Dataset):
-    def __init__(self, data_directory_path: str, window_size: int = 20):
+    def __init__(self, data_directory_path: str, window_size: int):
         self.window_size: int = window_size
 
         data_paths = os.listdir(data_directory_path)
@@ -42,7 +42,8 @@ class CustomDataset(Dataset):
                 r = m
             else:
                 l = m
-        assert l < len(self.length)
+        if l >= len(self.length) or l < 0:
+            raise RuntimeError("Invalid index!")
         return l
 
     def __len__(self):
@@ -50,7 +51,6 @@ class CustomDataset(Dataset):
 
     def __getitem__(self, index: int):
         sample_index = self.get_sample_index(index)
-        assert sample_index >= 0
         start = 0 if sample_index == 0 else index - self.length[sample_index]
         sample = self.samples[sample_index][start: start + self.window_size]
         gold = self.golds[sample_index]
