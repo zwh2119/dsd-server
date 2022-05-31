@@ -9,15 +9,46 @@ import subprocess
 from tempfile import mkdtemp
 import db_solution
 import db.device
+import smtplib
+from email.mime.text import MIMEText
 
 _tasks: dict = {}
 _stops: dict = {}
 
 
-def notify(device: db.device.Device) -> None:
+def notify(device: db.device.Device, res : bool) -> None:
     if device.email:
-        print(
-            f'Sending email to {device.email}, notifying new model for {device.uuid}')
+        host = 'smtp.qq.com'
+        port = 465
+        pwd = 'pcxubuaviqtthcfe'
+        sender = '1548767361@qq.com'
+        receiver = device.email
+
+        body = f'<p>Dear User of {device.uuid}:</p>'
+        if res:
+            body += '<p>&nbsp;&nbsp;&nbsp;&nbsp;We are glad to notify you that your training on the cloud ' \
+                    'has finished and your personal model has benn genrated as expected.</p>'
+            body += '<p>&nbsp;&nbsp;&nbsp;&nbsp;You can login the online system and deploy the model on your model.</p>'
+            body += '<p>&nbsp;&nbsp;&nbsp;&nbsp;Wish you have a good experience!</p>'
+        else:
+            body += '<p>&nbsp;&nbsp;&nbsp;&nbsp;We are sorry to notify you that your training on the cloud failed for' \
+                    'some unexpected reason.</p>'
+            body += '<p>&nbsp;&nbsp;&nbsp;&nbsp;Please login on the online system to retry or contact our company</p>'
+            body += '<p>&nbsp;&nbsp;&nbsp;&nbsp;Thanks for your support!</p>'
+        msg = MIMEText(body, 'html')
+        msg['subject'] = 'Training Result Notification from DSD'
+        msg['from'] = sender
+        msg['to'] = receiver
+        try:
+            s = smtplib.SMTP_SSL(host, port)
+            s.login(sender, pwd)
+            s.sendmail(sender, receiver, msg.as_string())
+            print(f'Sending email to {device.email}, notifying new model for {device.uuid}')
+        except:
+            print(f'Send email to {device.email} failed')
+
+    else:
+        print(f'{device.uuid} \'s email is empty, failed to notify')
 
 
 def __train(device: db.device.Device, info: dict, stop: threading.Event) -> None:
@@ -53,9 +84,10 @@ def __train(device: db.device.Device, info: dict, stop: threading.Event) -> None
     if proc.returncode == 0:
         print(f'Finished training for {device.uuid}')
         device.model = new_model
-        threading.Thread(target=notify, args=(device,)).start()
+        threading.Thread(target=notify, args=(device,True)).start()
     else:
         print(f'Training for {device.uuid} failed returning {proc.returncode}')
+        threading.Thread(target=notify, args=(device, False)).start()
 
     shutil.rmtree(new_model_dir)
 
