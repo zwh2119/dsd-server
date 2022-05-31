@@ -82,6 +82,7 @@ def run_train(duuid, algo) -> None:
     info = algo_list[algo]
     pos_dir = os.path.abspath('./al')
     info['base'] = info['base'].replace('$ALGO', pos_dir)
+    print("base path: ", info['base'])
     info['entrypoint']['train'] = [x.replace('$ALGO', pos_dir) for x in info['entrypoint']['train']]
 
     threading.Thread(target=_train, args=(duuid, info)).start()
