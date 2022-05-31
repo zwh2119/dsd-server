@@ -83,11 +83,13 @@ def __train(device: db.device.Device, info: dict, stop: threading.Event) -> None
             proc.kill()
     if proc.returncode == 0:
         print(f'Finished training for {device.uuid}')
-        device.model = new_model
-        threading.Thread(target=notify, args=(device,True)).start()
+        device.model[info['name']] = new_model
+        # threading.Thread(target=notify, args=(device,True)).start()
+        notify(device, True)
     else:
         print(f'Training for {device.uuid} failed returning {proc.returncode}')
-        threading.Thread(target=notify, args=(device, False)).start()
+        # threading.Thread(target=notify, args=(device, False)).start()
+        notify(device, False)
 
     shutil.rmtree(new_model_dir)
 
