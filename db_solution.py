@@ -65,7 +65,12 @@ def remove_device(test_uuid):
 
 
 def get_base_model(algo):
-    return db.device.get(uuid.UUID(int=0)).model[algo]
+    model = db.device.get(uuid.UUID(int=0)).model[algo]
+    if model is None:
+        with open('al/algo.json', 'r') as f:
+            algo_list = json.load(f)
+        model = algo_list[algo]['base'].replace('$ALGO', 'al')
+    return model
 
 
 def set_base_model(algo, base_model_path):
