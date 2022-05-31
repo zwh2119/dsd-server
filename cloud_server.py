@@ -296,6 +296,10 @@ def download_device_model(uuid, algo):
     file = model_path
     if file is None:
         file = db_solution.get_base_model(algo)
+    if file is None:
+        with open('al/algo.json', 'r') as f:
+            algo_list = json.load(f)
+        file = algo_list[algo]['base'].replace('$ALGO', os.path.abspath('./al'))
 
     if file is None:
         return get_error(404, 'No base model')
@@ -508,6 +512,11 @@ def download_base_model(algo):
     # model_file = algo_list[al]['base']
 
     model_file = db_solution.get_base_model(algo)
+    if model_file is None:
+        with open('al/algo.json', 'r') as f:
+            algo_list = json.load(f)
+        model_file = algo_list[algo]['base'].replace('$ALGO', os.path.abspath('./al'))
+
 
     file_name = os.path.split(model_file)[1]
     path = os.path.split(model_file)[0]
