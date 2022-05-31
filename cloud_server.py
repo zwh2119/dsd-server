@@ -293,14 +293,13 @@ def download_device_model(uuid, algo):
         return get_error(404, 'Algorithm not found')
 
     model_path = db_solution.get_model(uuid, algo)
-    if model_path is not None:
-        file = model_path
-        statinfo = os.stat(model_path)
-        response.set_header('Content-Length', statinfo.st_size)
-        response.set_header('Last-Modified', statinfo.st_mtime)
-    else:
-        del response.headers['Last-Modified']
+    file = model_path
+    if file is None:
         file = db_solution.get_base_model(algo)
+    if file is None:
+        with open('al/algo.json', 'r') as f:
+            algo_list = json.load(f)
+            file = algo_list[algo]['base'].replace('$ALGO', 'al')
 
     if file is None:
         return get_error(404, 'No base model')
@@ -310,6 +309,12 @@ def download_device_model(uuid, algo):
 
     download_file = static_file(file_name, root=path, download=True, mimetype='application/octet-stream')
     download_file.add_header('Signature', timestamp_solution.get_signature(file))
+
+    if model_path is not None:
+        statinfo = os.stat(file)
+        download_file.set_header('Last-Modified', statinfo.st_mtime)
+    else:
+        del download_file.headers['Last-Modified']
 
     return download_file
 
