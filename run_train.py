@@ -62,6 +62,9 @@ def __train(device: db.device.Device, info: dict, stop: threading.Event) -> None
     print('input model in the al: ', base_model)
     entry_point = info['entrypoint']['train']
     entry_point.append(calibration)
+    print('calibration', calibration)
+    print('new_model',new_model)
+    print('base_model', base_model)
     entry_point.append(new_model)
     entry_point.append(base_model)
 
