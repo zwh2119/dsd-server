@@ -11,7 +11,7 @@ import timestamp_solution
 import db_solution
 import os
 import run_train
-import init_db
+
 
 cloud_server = Bottle()
 
@@ -571,7 +571,6 @@ def tt():
     session.save()
 
 
-init_db.init()
 app = SessionMiddleware(cloud_server, session_opts)
 
 

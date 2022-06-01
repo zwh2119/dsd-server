@@ -3,7 +3,7 @@
     "name": "GRU",
     "display": "GRU",
     "desc": "Gated recurrent units (GRUs) are a gating mechanism in recurrent neural networks, introduced in 2014 by Kyunghyun Cho et al. The GRU is like a long short-term memory (LSTM) with a forget gate, but has fewer parameters than LSTM, as it lacks an output gate. GRU's performance on certain tasks of polyphonic music modeling, speech signal modeling and natural language processing was found to be similar to that of LSTM.GRUs have been shown to exhibit better performance on certain smaller and less frequent datasets.",
-    "base": "$ALGO/RNN/parameters.pt",
+    "base": "$ALGO/GRU/parameters.pt",
     "entrypoint": {
       "train": [
         "/usr/bin/env",
