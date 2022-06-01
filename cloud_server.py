@@ -79,8 +79,8 @@ def set_contact_email(uuid):
         if auth is None or not timestamp_solution.check_authentication(auth, uuid):
             return get_error(401, 'Invalid authorization')
 
-        if not db_solution.check_uuidv4(uuid):
-            return get_error(404, 'Invalid uuidv4')
+    if not db_solution.check_uuidv4(uuid):
+        return get_error(404, 'Invalid uuidv4')
 
     email_json = request.json
 
