@@ -38,20 +38,20 @@
   "FFN": {
     "name": "FFN",
     "display": "Feed Forward",
-    "desc": "Feed Forward model use multiple layer perceptron to classify the motion. In particular, this model do the spectral analysis first instead of direct send the motion datas.",
-        "base": "$ALGO/Hybrid/parameters.pt",
-        "entrypoint": {
-          "train": [
-            "/usr/bin/env",
-            "python3",
-            "$ALGO/FNN/train.py"
-          ],
-          "predict": [
-            "/usr/bin/env",
-            "python3",
-            "$ALGO/FNN/predict.py"
-          ]
-        }
+    "desc": "Feed Forward model use multiple layer perceptron to classify the motion. In particular, this model do the spectral analysis first instead of direct send the motion data",
+    "base": "$ALGO/FFN/parameters.pt",
+    "entrypoint": {
+      "train": [
+        "/usr/bin/env",
+        "python3",
+        "$ALGO/FNN/train.py"
+      ],
+      "predict": [
+        "/usr/bin/env",
+        "python3",
+        "$ALGO/FNN/predict.py"
+      ]
+    }
   },
   "NaiveBayes": {
     "name": "NaiveBayes",

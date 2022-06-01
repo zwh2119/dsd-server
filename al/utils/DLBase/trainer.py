@@ -31,7 +31,8 @@ class Trainer:
         self.out_model_file: str = out_model_file
 
         if in_model_file is not None:
-            model.load_state_dict(torch.load(in_model_file))
+            map_location = torch.device("cpu") if not torch.cuda.is_available() else None
+            model.load_state_dict(torch.load(in_model_file, map_location=map_location))
         optimizer = self.create_optimizer(model)
 
         train_dataloader = self.get_train_dataloader(data_file, utils.batch_size)
