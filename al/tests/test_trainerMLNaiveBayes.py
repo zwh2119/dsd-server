@@ -14,9 +14,9 @@ from utils.dataset import CustomDataset
 # 
 # So I talk with professor Mestre and he advised to do tests to the models based on the metrics that the model give, about the execution time(more necessary 
 # in the prediction) and test the predictions. All this with a dataset specific for the tests where we know the input and the expected output.
-# So I get 2 or 3 csv files from the eval folder. 
+# So I get 2 or 3 csv files from the train folder.
 # 
-# You have data that was never used in training??? Is the data in eval ??   
+# You have data that was never used in training??? Is the data in train ??
 # I simply used your code from the debug part of the MLBASE code.
 #
 #

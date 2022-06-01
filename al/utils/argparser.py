@@ -8,7 +8,7 @@ class TrainParser(argparse.ArgumentParser):
         self.add_argument('out_model_file', nargs='?', type=str, default='parameters.pt')
         self.add_argument('in_model_file', nargs='?', type=str, default=None)
         self.add_argument('--epochs', type=int, default=5)
-        self.add_argument('--debug', action='store_true', default=True)
+        self.add_argument('--debug', action='store_true', default=False)
 
 
 class PredictParser(argparse.ArgumentParser):

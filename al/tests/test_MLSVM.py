@@ -117,7 +117,7 @@ class TestMLSVM:
 
     # get test data
     def get_test_dataloader(self):
-        dataset = CustomDataset('tests/tests_data/eval', window_size=utils.window_size)
+        dataset = CustomDataset('tests/tests_data/train', window_size=utils.window_size)
         dataloader = DataLoader(dataset, batch_size=len(dataset), shuffle=True)
         X, Y = next(iter(dataloader))
         X = X.reshape(len(dataset), -1).numpy()

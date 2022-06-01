@@ -12,7 +12,6 @@ from utils.dataset import CustomDataset
 
 
 class TestDLFFN:
-
     @pytest.fixture(autouse=True)
     def _setup(self):
         self.timeStart = 0
@@ -20,10 +19,10 @@ class TestDLFFN:
 
     def test_accuracy_model(self):
         model = DLBase.FeedForwardModel(utils.data_size)
-        trainer = DLBase.Trainer(model, data_file="data", out_model_file='tests/parameters.pt', epochs=20, debug=False)
+        trainer = DLBase.Trainer(model, data_file='tests_data/train', out_model_file='parameters.pt', epochs=2)
         trainer()
 
-        test_X, test_Y = self.get_test_dataloader()
+        test_X, test_Y = self.get_test_data()
         test_start = time.perf_counter()
         predicts = trainer.model.predict(test_X)
         test_end = time.perf_counter()
@@ -53,7 +52,7 @@ class TestDLFFN:
 
         predictor = DLBase.Predictor(model, "parameters.pt")
         stdin = sys.stdin
-        sys.stdin = open('tests/tests_data/test_predict_time.csv', 'r')
+        sys.stdin = open('tests_data/test_predict_time.csv', 'r')
         predictor()
         test_end = time.perf_counter()
         sys.stdin = stdin
@@ -70,7 +69,7 @@ class TestDLFFN:
         model = DLBase.FeedForwardModel(utils.data_size)
         predictor = DLBase.Predictor(model, "parameters.pt")
         stdin = sys.stdin
-        sys.stdin = open('tests/tests_data/test_wrong_format.csv', 'r')
+        sys.stdin = open('tests_data/test_wrong_format.csv', 'r')
 
         with pytest.raises(ValueError) as _:
             predictor()
@@ -84,7 +83,7 @@ class TestDLFFN:
         model = DLBase.FeedForwardModel(utils.data_size)
         predictor = DLBase.Predictor(model, "parameters.pt")
         stdin = sys.stdin
-        sys.stdin = open('tests/tests_data/test_wrong_lenght.csv', 'r')
+        sys.stdin = open('tests_data/test_wrong_lenght.csv', 'r')
 
         with pytest.raises(RuntimeError) as _:
             predictor()
@@ -93,34 +92,34 @@ class TestDLFFN:
 
     # Insert some inputs on the predictor and see if result is the expected like, done in another test:
     @pytest.mark.parametrize(
-        "inputdata,expectedresult",
+        "input_data,expected_result",
         [
-            ("tests/tests_data/test_downstairs.csv", 'downstairs'),
-            ("tests/tests_data/test_run.csv", 'run'),
-            ("tests/tests_data/test_sit.csv", 'sit'),
-            ("tests/tests_data/test_stand.csv", 'stand'),
-            ("tests/tests_data/test_upstairs.csv", 'upstairs'),
-            ("tests/tests_data/test_walk.csv", 'walk'),
+            ("tests_data/test_downstairs.csv", 'downstairs'),
+            ("tests_data/test_run.csv", 'run'),
+            ("tests_data/test_sit.csv", 'sit'),
+            ("tests_data/test_stand.csv", 'stand'),
+            ("tests_data/test_upstairs.csv", 'upstairs'),
+            ("tests_data/test_walk.csv", 'walk'),
         ]
     )
-    def test_predictor_input_output(self, inputdata, expectedresult):
+    def test_predictor_input_output(self, input_data, expected_result):
         model = DLBase.FeedForwardModel(utils.data_size)
         predictor = DLBase.Predictor(model, "parameters.pt")
         stdin = sys.stdin
         stdout = sys.stdout
         sys.stdout = buffer = io.StringIO()
-        sys.stdin = open(inputdata, 'r')
+        sys.stdin = open(input_data, 'r')
         predictor()
         sys.stdout = stdout
         value = buffer.getvalue()
         value = value.replace('\n', '')
         sys.stdin = stdin
-        assert expectedresult == value
+        assert expected_result == value
 
-    # get test data
-    def get_test_dataloader(self):
-        dataset = CustomDataset('tests/tests_data/eval', window_size=utils.window_size)
+    @staticmethod
+    def get_test_data():
+        dataset = CustomDataset('tests/tests_data/train', window_size=utils.window_size)
         dataloader = DataLoader(dataset, batch_size=len(dataset), shuffle=True)
-        X, Y = next(iter(dataloader))
-        X = X.reshape(len(dataset), -1).numpy()
-        return X, Y
+        data, target = next(iter(dataloader))
+        data = data.reshape(len(dataset), -1)
+        return data, target
