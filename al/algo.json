@@ -1,104 +1,128 @@
 {
-    "gru": {
-        "name": "gru",
-        "display": "GRU",
-        "desc": "Gated recurrent units (GRUs) are a gating mechanism in recurrent neural networks, introduced in 2014 by Kyunghyun Cho et al. The GRU is like a long short-term memory (LSTM) with a forget gate, but has fewer parameters than LSTM, as it lacks an output gate. GRU's performance on certain tasks of polyphonic music modeling, speech signal modeling and natural language processing was found to be similar to that of LSTM.GRUs have been shown to exhibit better performance on certain smaller and less frequent datasets.",
-        "base": "$ALGO/RNN/parameters.pt",
-        "entrypoint": {
-            "train": [
-                "/usr/bin/env",
-                "python3",
-                "$ALGO/RNN/train.py"
-            ],
-            "predict": [
-                "/usr/bin/env",
-                "python3",
-                "$ALGO/RNN/predict.py"
-            ]
-        }
-    },
-    "hybrid": {
-        "name": "hybrid",
-        "display": "Hybrid",
-        "desc": "Hybrid model fuse recurrent network and convolutional network to build up the motion classifier.",
-        "base": "$ALGO/Hybrid/parameters.pt",
-        "entrypoint": {
-            "train": [
-                "/usr/bin/env",
-                "python3",
-                "$ALGO/RNN/train.py"
-            ],
-            "predict": [
-                "/usr/bin/env",
-                "python3",
-                "$ALGO/RNN/predict.py"
-            ]
-        }
-    },
-    "FFN": {
-        "name": "FFN",
-        "display": "Feed Forward",
-        "desc": "Feed Forward model use multiple layer perceptron to classify the motion. In particular, this model do the spectral analysis first instead of direct send the motion datas.",
-        "base": "$ALGO/Hybrid/parameters.pt",
-        "entrypoint": {
-            "train": [
-                "/usr/bin/env",
-                "python3",
-                "$ALGO/RNN/train.py"
-            ],
-            "predict": [
-                "/usr/bin/env",
-                "python3",
-                "$ALGO/RNN/predict.py"
-            ]
-        }
-    },
-    "naivebayes": {
-        "name": "naivebayes",
-        "display": "NaiveBayes",
-        "desc": "Naive Bayes is a simple technique for constructing classifiers: models that assign class labels to problem instances, represented as vectors of feature values, where the class labels are drawn from some finite set. There is not a single algorithm for training such classifiers, but a family of algorithms based on a common principle: all naive Bayes classifiers assume that the value of a particular feature is independent of the value of any other feature, given the class variable. For example, a fruit may be considered to be an apple if it is red, round, and about 10 cm in diameter. A naive Bayes classifier considers each of these features to contribute independently to the probability that this fruit is an apple, regardless of any possible correlations between the color, roundness, and diameter features.",
-        "base": "$ALGO/NaiveBayes/parameters.pt",
-        "entrypoint": {
-            "train": [
-                "/usr/bin/env",
-                "python3",
-                "$ALGO/NaiveBayes/train.py"
-            ],
-            "predict": [
-                "/usr/bin/env",
-                "python3",
-                "$ALGO/NaiveBayes/predict.py"
-            ]
-        }
-    },
-    "knn": {
-        "name": "knn",
-        "display": "KNN",
-        "desc": "K-Nearest Neighbors is a machine learning technique and algorithm that can be used for both regression and classification tasks. K-Nearest Neighbors examines the labels of a chosen number of data points surrounding a target data point, in order to make a prediction about the class that the data point falls into. K-Nearest Neighbors (KNN) is a conceptually simple yet very powerful algorithm, and for those reasons, it’s one of the most popular machine learning algorithms. ",
-        "base": "$ALGO/KNN/parameters.pt",
-        "entrypoint": {
-            "train": ["/usr/bin/env", "python3", "$ALGO/KNN/train.py"],
-            "predict": ["/usr/bin/env", "python3", "$ALGO/KNN/predict.py"]
-        }
-    },
-    "svm": {
-        "name": "svm",
-        "display": "SVM",
-        "desc": "SVM stands for Support Vector Machine. In the SVM algorithm, each point is represented as a data item within the n-dimensional space where the value of each feature is the value of a specific coordinate. After plotting, classification has been performed by finding hype plane, which differentiates two classes. Refer to the below image to understand this concept.",
-        "base": "$ALGO/SVM/parameters.pt",
-        "entrypoint": {
-            "train": ["/usr/bin/env", "python3", "$ALGO/SVM/train.py"],
-            "predict": ["/usr/bin/env", "python3", "$ALGO/SVM/predict.py"]
-        }
-    },
-    "decisiontree": {
-        "name": "decisiontree",
-        "display": "DecisionTree",
-        "desc": "A decision tree is a non-parametric supervised learning algorithm, which is utilized for both classification and regression tasks. It has a hierarchical, tree structure, which consists of a root node, branches, internal nodes and leaf nodes.",
-        "base": "$ALGO/DecisionTree/parameters.pt",
-        "entrypoint": {
-            "train": ["/usr/bin/env", "python3", "$ALGO/DecisionTree/train.py"],
-            "predict": ["/usr/bin/env", "python3", "$ALGO/DecisionTree/predict.py"]
-        }
+  "GRU": {
+    "name": "GRU",
+    "display": "GRU",
+    "desc": "Gated recurrent units (GRUs) are a gating mechanism in recurrent neural networks, introduced in 2014 by Kyunghyun Cho et al. The GRU is like a long short-term memory (LSTM) with a forget gate, but has fewer parameters than LSTM, as it lacks an output gate. GRU's performance on certain tasks of polyphonic music modeling, speech signal modeling and natural language processing was found to be similar to that of LSTM.GRUs have been shown to exhibit better performance on certain smaller and less frequent datasets.",
+    "base": "$ALGO/RNN/parameters.pt",
+    "entrypoint": {
+      "train": [
+        "/usr/bin/env",
+        "python3",
+        "$ALGO/GRU/train.py"
+      ],
+      "predict": [
+        "/usr/bin/env",
+        "python3",
+        "$ALGO/GRU/predict.py"
+      ]
     }
+  },
+  "Hybrid": {
+    "name": "Hybrid",
+    "display": "Hybrid",
+    "desc": "Hybrid model fuse recurrent network and convolutional network to build up the motion classifier.",
+    "base": "$ALGO/Hybrid/parameters.pt",
+    "entrypoint": {
+      "train": [
+        "/usr/bin/env",
+        "python3",
+        "$ALGO/Hybrid/train.py"
+      ],
+      "predict": [
+        "/usr/bin/env",
+        "python3",
+        "$ALGO/Hybrid/predict.py"
+      ]
+    }
+  },
+  "FFN": {
+    "name": "FFN",
+    "display": "Feed Forward",
+    "desc": "Feed Forward model use multiple layer perceptron to classify the motion. In particular, this model do the spectral analysis first instead of direct send the motion datas.",
+        "base": "$ALGO/Hybrid/parameters.pt",
+        "entrypoint": {
+          "train": [
+            "/usr/bin/env",
+            "python3",
+            "$ALGO/FNN/train.py"
+          ],
+          "predict": [
+            "/usr/bin/env",
+            "python3",
+            "$ALGO/FNN/predict.py"
+          ]
+        }
+  },
+  "NaiveBayes": {
+    "name": "NaiveBayes",
+    "display": "NaiveBayes",
+    "desc": "Naive Bayes is a simple technique for constructing classifiers: models that assign class labels to problem instances, represented as vectors of feature values, where the class labels are drawn from some finite set. There is not a single algorithm for training such classifiers, but a family of algorithms based on a common principle: all naive Bayes classifiers assume that the value of a particular feature is independent of the value of any other feature, given the class variable. For example, a fruit may be considered to be an apple if it is red, round, and about 10 cm in diameter. A naive Bayes classifier considers each of these features to contribute independently to the probability that this fruit is an apple, regardless of any possible correlations between the color, roundness, and diameter features.",
+    "base": "$ALGO/NaiveBayes/parameters.pt",
+    "entrypoint": {
+      "train": [
+        "/usr/bin/env",
+        "python3",
+        "$ALGO/NaiveBayes/train.py"
+      ],
+      "predict": [
+        "/usr/bin/env",
+        "python3",
+        "$ALGO/NaiveBayes/predict.py"
+      ]
+    }
+  },
+  "KNN": {
+    "name": "KNN",
+    "display": "KNN",
+    "desc": "K-Nearest Neighbors is a machine learning technique and algorithm that can be used for both regression and classification tasks. K-Nearest Neighbors examines the labels of a chosen number of data points surrounding a target data point, in order to make a prediction about the class that the data point falls into. K-Nearest Neighbors (KNN) is a conceptually simple yet very powerful algorithm, and for those reasons, it’s one of the most popular machine learning algorithms. ",
+    "base": "$ALGO/KNN/parameters.pt",
+    "entrypoint": {
+      "train": [
+        "/usr/bin/env",
+        "python3",
+        "$ALGO/KNN/train.py"
+      ],
+      "predict": [
+        "/usr/bin/env",
+        "python3",
+        "$ALGO/KNN/predict.py"
+      ]
+    }
+  },
+  "SVM": {
+    "name": "SVM",
+    "display": "SVM",
+    "desc": "SVM stands for Support Vector Machine. In the SVM algorithm, each point is represented as a data item within the n-dimensional space where the value of each feature is the value of a specific coordinate. After plotting, classification has been performed by finding hype plane, which differentiates two classes. Refer to the below image to understand this concept.",
+    "base": "$ALGO/SVM/parameters.pt",
+    "entrypoint": {
+      "train": [
+        "/usr/bin/env",
+        "python3",
+        "$ALGO/SVM/train.py"
+      ],
+      "predict": [
+        "/usr/bin/env",
+        "python3",
+        "$ALGO/SVM/predict.py"
+      ]
+    }
+  },
+  "DecisionTree": {
+    "name": "DecisionTree",
+    "display": "DecisionTree",
+    "desc": "A decision tree is a non-parametric supervised learning algorithm, which is utilized for both classification and regression tasks. It has a hierarchical, tree structure, which consists of a root node, branches, internal nodes and leaf nodes.",
+    "base": "$ALGO/DecisionTree/parameters.pt",
+    "entrypoint": {
+      "train": [
+        "/usr/bin/env",
+        "python3",
+        "$ALGO/DecisionTree/train.py"
+      ],
+      "predict": [
+        "/usr/bin/env",
+        "python3",
+        "$ALGO/DecisionTree/predict.py"
+      ]
+    }
+  }
 }

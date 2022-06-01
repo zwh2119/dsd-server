@@ -22,7 +22,9 @@ class CustomDataset(Dataset):
 
         self.samples, self.golds = [], []
         for path in tqdm(data_paths, desc='Reading data'):
-            idx = utils.label2idx[self.get_motion(path)]
+            idx = utils.label2idx.get(self.get_motion(path), None)
+            if idx is None:
+                continue
             sample = torch.as_tensor(pd.read_csv(path, header=None).values, dtype=torch.float)
             self.samples.append(sample)
             self.golds.append(idx)

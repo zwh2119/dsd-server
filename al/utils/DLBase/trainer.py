@@ -24,6 +24,8 @@ class Trainer:
             in_model_file: str = None,
             debug: bool = False
     ):
+        self.total_steps = None
+
         self.epochs: int = epochs
 
         self.out_model_file: str = out_model_file
@@ -32,7 +34,7 @@ class Trainer:
             model.load_state_dict(torch.load(in_model_file))
         optimizer = self.create_optimizer(model)
 
-        train_dataloader = self.get_train_dataloader(data_file, 32)
+        train_dataloader = self.get_train_dataloader(data_file, utils.batch_size)
 
         self.accelerator = Accelerator()
         self.model, self.optimizer = self.accelerator.prepare(model, optimizer)
@@ -52,7 +54,7 @@ class Trainer:
                     self.optimizer.zero_grad()
 
                     prediction = self.model(data)
-                    loss = functional.cross_entropy(prediction, gold)
+                    loss = functional.cross_entropy(prediction, gold, label_smoothing=0.5)
                     self.accelerator.backward(loss)
                     self.optimizer.step()
 
@@ -76,9 +78,9 @@ class Trainer:
     def create_optimizer(model: nn.Module):
         return torch.optim.AdamW(model.parameters(), lr=3e-4)
 
-    @staticmethod
-    def get_train_dataloader(data_file: str, batch_size: int):
+    def get_train_dataloader(self, data_file: str, batch_size: int):
         train_dataset = CustomDataset(data_file, window_size=utils.window_size)
+        self.total_steps = (len(train_dataset) // utils.batch_size + 1) * self.epochs
         return DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 
     @staticmethod

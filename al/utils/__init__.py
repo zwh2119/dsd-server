@@ -5,6 +5,7 @@ from .dataset import *
 
 window_size: int = 20
 data_size: int = 45
+batch_size: int = 32
 
 label2idx = {
     'sit': 0,

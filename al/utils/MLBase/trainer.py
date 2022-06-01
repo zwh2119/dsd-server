@@ -22,17 +22,17 @@ class Trainer:
         self.debug = debug
 
     def train(self):
-        X, Y = self.get_train_dataloader()
+        data, target = self.get_train_dataloader()
         train_start = time.perf_counter()
-        self.model.fit(X, Y)
+        self.model.fit(data, target)
         train_end = time.perf_counter()
         print(train_end - train_start)
         joblib.dump(self.model, self.out_model_file)
 
         if self.debug:
-            X, golds = self.get_eval_dataloader()
+            data, golds = self.get_eval_dataloader()
             test_start = time.perf_counter()
-            predicts = self.model.predict(X)
+            predicts = self.model.predict(data)
             test_end = time.perf_counter()
             print(test_end - test_start)
             logger.info("\n" + metrics.classification_report(golds, predicts))
@@ -41,17 +41,17 @@ class Trainer:
     def get_train_dataloader(self):
         dataset = CustomDataset(self.data_file, window_size=utils.window_size)
         dataloader = DataLoader(dataset, batch_size=len(dataset) // 10, shuffle=True)
-        X, Y = next(iter(dataloader))
-        X = X.reshape(len(dataset) // 10, -1).numpy()
-        return X, Y
+        data, target = next(iter(dataloader))
+        data = data.reshape(len(dataset) // 10, -1).numpy()
+        return data, target
 
     @staticmethod
     def get_eval_dataloader():
         dataset = CustomDataset('../eval', window_size=utils.window_size)
         dataloader = DataLoader(dataset, batch_size=len(dataset), shuffle=True)
-        X, Y = next(iter(dataloader))
-        X = X.reshape(len(dataset), -1).numpy()
-        return X, Y
+        data, target = next(iter(dataloader))
+        data = data.reshape(len(dataset), -1).numpy()
+        return data, target
 
     def __call__(self):
         return self.train()

@@ -1,34 +1,36 @@
-# Welcome to the algorithm group North Star!
+# Welcome to the algorithm group _North Star_!
+
+## Description
+
+This is the home page of the algorithm group _North Star_, where you can view our real-time progress and work in progress.
 
 ## Team Arrangement
 
-* **Wen Xueru**: Project Manager & Liaison & Tester
+- **Wen Xueru**: Project Manager & Liaison & Tester
 
-* **Dong Jin**: System Architect & Programmer
+- **Dong Jin**: System Architect & Programmer
 
-* **Zhou Changjiang**: Requirement Analyst & Programmer
+- **Zhou Changjiang**: Requirement Analyst & Programmer
 
-## Hiring:
+- **Rodrigo Pereira**: Tester & Programmer
 
-We welcome you to join our team if you are interested in **algorithms**.
+## Contact:
 
-We expect you to understand the basics of **machine learning** and to be able to use **Python** and the **Pytorch** framework.
+Email: **wenxr2119@mails.jlu.edu.cn** or **2577273670@qq.com**
 
-### Contact: wenxr2119@mails.jlu.edu.cn
+Skype: **live:.cid.3720a422120d0180** (Rosenberg Michael)
 
-### Contact: 2577273670@qq.com
+## Progresses
 
-## 3.30 Progress achieved
+### 3.30 Progress achieved
 
-### Requirement Analysis
+#### Requirement Analysis
 
-- The server or potential platform user intend to pretrain the model for common people and further user-specified fine-tune process.
-- The server or potential platform user wants to change the model to make it the most suitable model for his or her.
-- The server or potential platform user wants to predict the future mode of the user.
-- The server or potential platform user intends to switch the scene to adapt to the requirements of specific scenarios.
+- The server or potential platform user intend to pretrain the model for common people.
+- The server or potential platform user intend to further user-specified fine-tune process.
 - The server or potential platform user intends to select the algorithm to achieve the desired effect.
 
-### Rapid prototyping model
+#### Rapid prototyping model
 
 - **Classification**
 
@@ -36,21 +38,21 @@ We expect you to understand the basics of **machine learning** and to be able to
 
   <img src="assets/classification.jpg" alt="classification" style="zoom: 10%;" />
 
-## 4.13 Progress achieved
+### 4.13 Progress achieved
 
-### System Design
+#### System Design
 
 Here is the [system design documents](documents).
 
-## 4.17 Progress achieved
+### 4.17 Progress achieved
 
-### Rapid prototyping model
+#### Rapid prototyping model
 
 Macro-F1 reach 98.3% under the GRU network.
 
-## 4.20 Progress achieved
+### 4.20 Progress achieved
 
-### Tentative implement
+#### Tentative implement
 
 Macro-F1 reach 98.0% with separated datasets.
 
@@ -58,31 +60,31 @@ Speed up the IO by transforming data format into csv.
 
 <img src="assets/result.png" alt="classification" style="zoom: 10%;" />
 
-## 4.26 Progress achieved
+### 4.26 Progress achieved
 
-### Tentative implement of interface.
+#### Tentative implement of interface.
 
-## 4.26 Progress achieved
+### 4.26 Progress achieved
 
-### Rough implement of interface.
+#### Rough implement of interface.
 
-### Simple unitest.
+#### Simple unitest.
 
-### Solve the failure on the evaluation by set large window_size.
+#### Solve the failure on the evaluation by set large window_size.
 
-## 5.11 Progress achieved
+### 5.11 Progress achieved
 
-### Involved in integral test.
+#### Involved in integral test.
 
-## 5.18 Progress achieved
+### 5.18 Progress achieved
 
-### Implementation for multiple algorithms, including **SVM**,  **KNN**, NaiveBayes, DecisionTree
+#### Implementation for multiple algorithms, including **SVM**,  **KNN**, NaiveBayes, DecisionTree
 
-### Update the interface to the latest version.
+#### Update the interface to the latest version.
 
-All experiments is conducted in a **1/10 down-sample strategy** as **memory overflow** could be brought about when transfering all data.
+All experiments are conducted in a **1/10 down-sample strategy** as **memory overflow** could be brought about when transfering all data.
 
-#### SVM
+##### SVM
 
               precision    recall  f1-score   support
     
@@ -97,9 +99,7 @@ All experiments is conducted in a **1/10 down-sample strategy** as **memory over
     macro avg      0.76      0.81      0.79     18976
     weighted avg   0.85     0.91       0.88     18976
 
-
-
-#### KNN
+##### KNN
 
               precision    recall  f1-score   support
     
@@ -114,9 +114,7 @@ All experiments is conducted in a **1/10 down-sample strategy** as **memory over
     macro avg 	   0.52      0.65      0.47     18976
     weighted avg   0.82      0.69      0.67     18976
 
-
-
-#### NaiveBayes
+##### NaiveBayes
 
               precision    recall  f1-score   support
     
@@ -131,9 +129,7 @@ All experiments is conducted in a **1/10 down-sample strategy** as **memory over
     macro avg 	   0.86      0.89      0.87     18976
     weighted avg   0.96      0.96      0.96     18976
 
-
-
-#### DecisionTree
+##### DecisionTree
 
               precision    recall  f1-score   support
     
@@ -148,7 +144,7 @@ All experiments is conducted in a **1/10 down-sample strategy** as **memory over
     macro avg 	  0.46       0.57      0.44     18976
     weighted avg  0.47       0.56      0.48     18976
 
-### RandomForest
+##### RandomForest
 
               precision    recall  f1-score   support
     
@@ -166,7 +162,9 @@ All experiments is conducted in a **1/10 down-sample strategy** as **memory over
 
 ### 5.20 ProgressAchieved
 
-We have implemented the integrated  voter model of 10 Naive Bayes, of which the results (**as follows**) indicate that transfering all data performs no better than sampling 1/10 of the data. Therefore for all **machine learning** methods employ a **1/10 down-sampling** strategy in terms of efficiency. Note that luckily the **deep learning** methods won't be faced with the dilemma due to the **mini-batch training strategy**.
+We have implemented the integrated voter model of 10 Naive Bayes, of which the results (**as follows**) indicate that transfering all data performs no better than sampling 1/10 of the data. Therefore,
+for all **machine learning** methods employ a **1/10 down-sampling** strategy in terms of efficiency. Note that luckily the **deep learning** methods won't be faced with the dilemma due to the **
+mini-batch training strategy**.
 
 ```
               precision    recall  f1-score   support
@@ -183,4 +181,6 @@ We have implemented the integrated  voter model of 10 Naive Bayes, of which the 
 weighted avg       0.96      0.96      0.96     18976
 ```
 
- 
+## Final Result
+
+### Pretrain Model
