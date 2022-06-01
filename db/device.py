@@ -1,6 +1,6 @@
 import shutil
 from turtle import update
-from db import conn, MODEL, CALIBRATION
+from db import conn, MODEL, CALIBRATION, DEVICE
 import os
 from uuid import UUID
 from typing import Union
@@ -105,6 +105,6 @@ def remove(uuid: Union[str, UUID]) -> None:
     if dir and os.path.exists(dir):
         shutil.rmtree(dir)
 
-    dir = MODEL % uuid
+    dir = os.path.join(DEVICE, uuid)
     if dir and os.path.exists(dir):
         os.remove(dir)
