@@ -107,4 +107,4 @@ def remove(uuid: Union[str, UUID]) -> None:
 
     dir = os.path.join(DEVICE, uuid)
     if dir and os.path.exists(dir):
-        os.remove(dir)
+        shutil.rmtree(dir)
