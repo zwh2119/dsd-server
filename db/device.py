@@ -65,14 +65,19 @@ class Device:
     @calibration.setter
     def calibration(self, value: str) -> None:
         if value is None:
-            shutil.rmtree(self.calibration, ignore_errors=True)
+            if self.calibration and os.path.exists(self.calibration):
+                shutil.rmtree(self.calibration, ignore_errors=True)
+                
+            conn.execute("UPDATE devices SET calibration = NULL WHERE uuid = ?", (self._uuid,))
+            conn.commit()
         else:
+            conn.execute("UPDATE devices SET calibration = ? WHERE uuid = ?", (CALIBRATION % (self._uuid), self._uuid))
+            conn.commit()
             if not os.path.exists(self.calibration):
                 os.makedirs(self.calibration)
 
             shutil.rmtree(self.calibration, ignore_errors=True)
-            shutil.copytree(value, self.calibration)
-
+            shutil.copytree(value, CALIBRATION % (self._uuid))
 
 def exists(devid: Union[str, UUID]) -> bool:
     devid = UUID(str(devid), version=4).hex
@@ -89,10 +94,9 @@ def get(uuid: Union[str, UUID]) -> Device:
 
     if row is None:
         conn.execute("INSERT INTO devices (uuid, email, calibration) VALUES (?,?,?) ",
-                     (uuid, None, CALIBRATION % uuid))
+                     (uuid, None, None))
         conn.commit()
-        row = (uuid, None, CALIBRATION % uuid)
-        os.makedirs(CALIBRATION % uuid)
+        row = (uuid, None, None)
 
     return Device(row[0])
 
