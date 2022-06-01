@@ -570,6 +570,7 @@ def tt():
 
     session.save()
 
+
 init_db.init()
 app = SessionMiddleware(cloud_server, session_opts)
 
