@@ -39,7 +39,7 @@
     "name": "FFN",
     "display": "Feed Forward",
     "desc": "Feed Forward model use multiple layer perceptron to classify the motion. In particular, this model do the spectral analysis first instead of direct send the motion data",
-    "base": "$ALGO/FFN/parameters.pt",
+    "base": "$ALGO/FNN/parameters.pt",
     "entrypoint": {
       "train": [
         "/usr/bin/env",
